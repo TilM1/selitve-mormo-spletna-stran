@@ -1,0 +1,362 @@
+[
+ {
+  "id": "ljubljana",
+  "name": "Ljubljana",
+  "major": true,
+  "lat": 46.05003,
+  "lon": 14.50693,
+  "x": 353.8,
+  "y": 374.8
+ },
+ {
+  "id": "grosuplje",
+  "name": "Grosuplje",
+  "major": false,
+  "lat": 45.94429,
+  "lon": 14.66421,
+  "x": 401.9,
+  "y": 421.5
+ },
+ {
+  "id": "skofljica",
+  "name": "Škofljica",
+  "major": false,
+  "lat": 45.9567,
+  "lon": 14.57836,
+  "x": 375.6,
+  "y": 416
+ },
+ {
+  "id": "ivancna-gorica",
+  "name": "Ivančna Gorica",
+  "major": false,
+  "lat": 45.90428,
+  "lon": 14.81212,
+  "x": 447.1,
+  "y": 439.1
+ },
+ {
+  "id": "domzale",
+  "name": "Domžale",
+  "major": false,
+  "lat": 46.13943,
+  "lon": 14.59446,
+  "x": 380.5,
+  "y": 335.4
+ },
+ {
+  "id": "kamnik",
+  "name": "Kamnik",
+  "major": false,
+  "lat": 46.2751,
+  "lon": 14.62677,
+  "x": 390.4,
+  "y": 275.6
+ },
+ {
+  "id": "medvode",
+  "name": "Medvode",
+  "major": false,
+  "lat": 46.13458,
+  "lon": 14.40106,
+  "x": 321.4,
+  "y": 337.6
+ },
+ {
+  "id": "skofja-loka",
+  "name": "Škofja Loka",
+  "major": false,
+  "lat": 46.16527,
+  "lon": 14.30675,
+  "x": 292.6,
+  "y": 324
+ },
+ {
+  "id": "vrhnika",
+  "name": "Vrhnika",
+  "major": false,
+  "lat": 45.94756,
+  "lon": 14.28759,
+  "x": 286.7,
+  "y": 420
+ },
+ {
+  "id": "logatec",
+  "name": "Logatec",
+  "major": false,
+  "lat": 45.94325,
+  "lon": 14.17994,
+  "x": 253.8,
+  "y": 421.9
+ },
+ {
+  "id": "litija",
+  "name": "Litija",
+  "major": false,
+  "lat": 46.04968,
+  "lon": 14.99108,
+  "x": 501.8,
+  "y": 375
+ },
+ {
+  "id": "kranj",
+  "name": "Kranj",
+  "major": true,
+  "lat": 46.24329,
+  "lon": 14.35494,
+  "x": 307.3,
+  "y": 289.6
+ },
+ {
+  "id": "radovljica",
+  "name": "Radovljica",
+  "major": false,
+  "lat": 46.34502,
+  "lon": 14.19763,
+  "x": 259.2,
+  "y": 244.7
+ },
+ {
+  "id": "bled",
+  "name": "Bled",
+  "major": false,
+  "lat": 46.36842,
+  "lon": 14.11006,
+  "x": 232.4,
+  "y": 234.4
+ },
+ {
+  "id": "jesenice",
+  "name": "Jesenice",
+  "major": false,
+  "lat": 46.44592,
+  "lon": 14.06631,
+  "x": 219,
+  "y": 200.3
+ },
+ {
+  "id": "idrija",
+  "name": "Idrija",
+  "major": false,
+  "lat": 46.0024,
+  "lon": 14.0273,
+  "x": 207.1,
+  "y": 395.8
+ },
+ {
+  "id": "postojna",
+  "name": "Postojna",
+  "major": false,
+  "lat": 45.78727,
+  "lon": 14.15931,
+  "x": 247.5,
+  "y": 490.7
+ },
+ {
+  "id": "ilirska-bistrica",
+  "name": "Ilirska Bistrica",
+  "major": false,
+  "lat": 45.57722,
+  "lon": 14.29703,
+  "x": 289.6,
+  "y": 583.3
+ },
+ {
+  "id": "kocevje",
+  "name": "Kočevje",
+  "major": false,
+  "lat": 45.63078,
+  "lon": 14.86815,
+  "x": 464.2,
+  "y": 559.7
+ },
+ {
+  "id": "ribnica",
+  "name": "Ribnica",
+  "major": false,
+  "lat": 45.72809,
+  "lon": 14.7391,
+  "x": 424.8,
+  "y": 516.8
+ },
+ {
+  "id": "novo-mesto",
+  "name": "Novo mesto",
+  "major": true,
+  "lat": 45.80405,
+  "lon": 15.16967,
+  "x": 556.4,
+  "y": 483.3
+ },
+ {
+  "id": "crnomelj",
+  "name": "Črnomelj",
+  "major": false,
+  "lat": 45.52506,
+  "lon": 15.21069,
+  "x": 569,
+  "y": 606.3
+ },
+ {
+  "id": "metlika",
+  "name": "Metlika",
+  "major": false,
+  "lat": 45.6501,
+  "lon": 15.31745,
+  "x": 601.6,
+  "y": 551.2
+ },
+ {
+  "id": "krsko",
+  "name": "Krško",
+  "major": false,
+  "lat": 45.95764,
+  "lon": 15.49468,
+  "x": 655.8,
+  "y": 415.6
+ },
+ {
+  "id": "brezice",
+  "name": "Brežice",
+  "major": false,
+  "lat": 45.93761,
+  "lon": 15.63293,
+  "x": 698.1,
+  "y": 424.4
+ },
+ {
+  "id": "trbovlje",
+  "name": "Trbovlje",
+  "major": false,
+  "lat": 46.13709,
+  "lon": 15.04648,
+  "x": 518.8,
+  "y": 336.4
+ },
+ {
+  "id": "celje",
+  "name": "Celje",
+  "major": true,
+  "lat": 46.22939,
+  "lon": 15.26168,
+  "x": 584.6,
+  "y": 295.7
+ },
+ {
+  "id": "velenje",
+  "name": "Velenje",
+  "major": false,
+  "lat": 46.35929,
+  "lon": 15.11503,
+  "x": 539.7,
+  "y": 238.5
+ },
+ {
+  "id": "slovenj-gradec",
+  "name": "Slovenj Gradec",
+  "major": false,
+  "lat": 46.50914,
+  "lon": 15.07907,
+  "x": 528.7,
+  "y": 172.4
+ },
+ {
+  "id": "maribor",
+  "name": "Maribor",
+  "major": true,
+  "lat": 46.55764,
+  "lon": 15.64559,
+  "x": 702,
+  "y": 151
+ },
+ {
+  "id": "ptuj",
+  "name": "Ptuj",
+  "major": false,
+  "lat": 46.41981,
+  "lon": 15.87174,
+  "x": 771.1,
+  "y": 211.8
+ },
+ {
+  "id": "murska-sobota",
+  "name": "Murska Sobota",
+  "major": true,
+  "lat": 46.66246,
+  "lon": 16.16553,
+  "x": 861,
+  "y": 104.8
+ },
+ {
+  "id": "lendava",
+  "name": "Lendava",
+  "major": false,
+  "lat": 46.56396,
+  "lon": 16.45265,
+  "x": 948.8,
+  "y": 148.2
+ },
+ {
+  "id": "koper",
+  "name": "Koper",
+  "major": true,
+  "lat": 45.54799,
+  "lon": 13.73048,
+  "x": 116.3,
+  "y": 596.2
+ },
+ {
+  "id": "izola",
+  "name": "Izola",
+  "major": false,
+  "lat": 45.54732,
+  "lon": 13.64783,
+  "x": 91.1,
+  "y": 596.5
+ },
+ {
+  "id": "piran",
+  "name": "Piran",
+  "major": false,
+  "lat": 45.52849,
+  "lon": 13.56845,
+  "x": 66.8,
+  "y": 604.8
+ },
+ {
+  "id": "sezana",
+  "name": "Sežana",
+  "major": false,
+  "lat": 45.70918,
+  "lon": 13.8731,
+  "x": 160,
+  "y": 525.2
+ },
+ {
+  "id": "nova-gorica",
+  "name": "Nova Gorica",
+  "major": true,
+  "lat": 45.95815,
+  "lon": 13.6475,
+  "x": 91,
+  "y": 415.4
+ },
+ {
+  "id": "ajdovscina",
+  "name": "Ajdovščina",
+  "major": false,
+  "lat": 45.9122,
+  "lon": 13.87601,
+  "x": 160.8,
+  "y": 435.6
+ },
+ {
+  "id": "tolmin",
+  "name": "Tolmin",
+  "major": false,
+  "lat": 46.14373,
+  "lon": 13.78928,
+  "x": 134.3,
+  "y": 333.5
+ }
+]
