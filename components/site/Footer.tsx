@@ -59,7 +59,7 @@ export function Footer() {
             </li>
             <li>
               <Link href="/cenik" className="hover:text-lime">
-                Cenik in ponudba
+                Cenik
               </Link>
             </li>
             <li>

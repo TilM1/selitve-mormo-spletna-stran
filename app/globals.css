@@ -302,14 +302,14 @@ body {
     inset: 0;
     z-index: -1;
     background:
-      linear-gradient(90deg, rgb(23 25 27 / 0.8) 0%, rgb(23 25 27 / 0.5) 45%, rgb(23 25 27 / 0.1) 75%),
-      linear-gradient(0deg, rgb(23 25 27 / 0.7) 0%, rgb(23 25 27 / 0) 40%),
-      linear-gradient(180deg, rgb(23 25 27 / 0.55) 0%, rgb(23 25 27 / 0) 18%);
+      linear-gradient(90deg, rgb(23 25 27 / 0.62) 0%, rgb(23 25 27 / 0.3) 34%, rgb(23 25 27 / 0) 58%),
+      linear-gradient(0deg, rgb(23 25 27 / 0.6) 0%, rgb(23 25 27 / 0) 30%),
+      linear-gradient(180deg, rgb(23 25 27 / 0.5) 0%, rgb(23 25 27 / 0) 16%);
   }
   .hero__title {
     font-stretch: 120%;
     font-weight: 820;
-    font-size: clamp(2rem, min(4.2vw, 6.4svh), 4rem);
+    font-size: clamp(1.85rem, min(3.1vw, 5.2svh), 3.1rem);
     line-height: 1;
     letter-spacing: -0.025em;
     text-wrap: balance;
@@ -317,7 +317,7 @@ body {
   .hero__sig {
     font-stretch: 125%;
     font-weight: 880;
-    font-size: clamp(2.5rem, min(6.4vw, 9.5svh), 6.25rem);
+    font-size: clamp(2.1rem, min(4.6vw, 7svh), 4.5rem);
     line-height: 0.92;
     letter-spacing: -0.035em;
   }
@@ -351,61 +351,6 @@ body {
     color: #fff;
     padding-top: calc(var(--nav-h) + clamp(40px, 7vw, 96px));
     padding-bottom: clamp(48px, 7vw, 96px);
-  }
-
-  /* ---------------------------------------------------------------- */
-  /* Packing tape band (the one marquee on the page)                  */
-  /* ---------------------------------------------------------------- */
-  .tape {
-    position: relative;
-    z-index: 2;
-    margin-block: -28px;
-    transform: rotate(-1.6deg);
-    background: var(--color-lime);
-    color: var(--color-ink);
-    overflow: hidden;
-    box-shadow: 0 8px 24px rgb(17 20 22 / 0.18);
-  }
-  .tape::before,
-  .tape::after {
-    /* torn tape edges */
-    content: "";
-    position: absolute;
-    inset-inline: 0;
-    height: 5px;
-    background: repeating-linear-gradient(90deg, transparent 0 7px, rgb(17 20 22 / 0.1) 7px 9px);
-  }
-  .tape::before {
-    top: 0;
-  }
-  .tape::after {
-    bottom: 0;
-  }
-  .tape__track {
-    display: flex;
-    width: max-content;
-  }
-  .tape__item {
-    display: flex;
-    align-items: center;
-    gap: 28px;
-    padding: 18px 14px;
-    font-stretch: 125%;
-    font-weight: 850;
-    font-size: clamp(1.1rem, 2vw, 1.6rem);
-    letter-spacing: -0.01em;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-  @media (prefers-reduced-motion: no-preference) {
-    .tape__track {
-      animation: tape 38s linear infinite;
-    }
-  }
-  @keyframes tape {
-    to {
-      transform: translateX(-50%);
-    }
   }
 
   /* ---------------------------------------------------------------- */
@@ -646,6 +591,28 @@ body {
     touch-action: manipulation;
     user-select: none;
     -webkit-user-select: none;
+  }
+  .map-svg--drag {
+    touch-action: none; /* the map owns the drag gesture */
+    cursor: grab;
+  }
+  .map-svg--drag[data-dragging] {
+    cursor: grabbing;
+  }
+  .map-demo__line {
+    fill: none;
+    stroke: var(--color-lime-deep);
+    stroke-linecap: round;
+    stroke-dasharray: 2 10;
+  }
+  .map-demo__finger {
+    fill: rgb(209 254 23 / 0.55);
+    stroke: var(--color-ink);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .map-demo__finger {
+      display: none;
+    }
   }
   .map-land {
     fill: #e3e7ea;

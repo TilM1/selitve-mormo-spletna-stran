@@ -13,46 +13,19 @@ import { ContactForm } from "@/components/forms/ContactForm";
 /* ------------------------------------------------------------------ */
 /* Inquiry                                                             */
 /* ------------------------------------------------------------------ */
-export function InquirySection({ initialService, title = "Povpraševanje v petih korakih" }: { initialService?: InquiryService; title?: string }) {
+export function InquirySection({ initialService, title = "Povpraševanje v 5 korakih" }: { initialService?: InquiryService; title?: string }) {
   return (
-    <section id="povprasevanje" className="section bg-fog" aria-labelledby="povprasevanje-h">
+    <section id="povprasevanje" className="bg-fog pb-[clamp(72px,10vw,144px)] pt-10 md:pt-14" aria-labelledby="povprasevanje-h">
       <div className="wrap">
-        <div className="mb-10 md:mb-14">
-          <h2 id="povprasevanje-h" className="t-headline max-w-[20ch]">
+        <div className="mb-6 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+          <h2 id="povprasevanje-h" className="t-title">
             {title}
           </h2>
-          <p className="t-lead mt-4 max-w-[52ch] text-steel">Kliknete nekajkrat, izberete pot na zemljevidu in pustite številko. Ponudbo pripravimo mi.</p>
+          <p className="text-steel">Izberite storitev, povlecite pot na zemljevidu in pustite številko.</p>
         </div>
         <InquiryWizard initialService={initialService} />
       </div>
     </section>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/* Packing tape                                                        */
-/* ------------------------------------------------------------------ */
-export function Tape() {
-  const words = ["Mormo delat!", "Selitve", "Prevozi", "Odvoz krame", "Ljubljana in vsa Slovenija"];
-  const row = (hidden: boolean) => (
-    <div className="tape__item" aria-hidden={hidden || undefined}>
-      {words.map((w) => (
-        <span key={w} className="flex items-center gap-7">
-          {w}
-          <span className="inline-block h-3 w-3 rotate-45 bg-ink" aria-hidden />
-        </span>
-      ))}
-    </div>
-  );
-  return (
-    <div className="tape" role="presentation">
-      <div className="tape__track">
-        {row(false)}
-        {row(true)}
-        {row(true)}
-        {row(true)}
-      </div>
-    </div>
   );
 }
 
@@ -91,7 +64,8 @@ export function Process() {
               </span>
               {p.signature ? (
                 <div className="-mt-1 rounded-[20px] bg-lime p-6 text-ink lg:p-8">
-                  <h3 className="t-display text-[clamp(2.4rem,5.4vw,4.75rem)]">{p.title}</h3>
+                  <p className="t-title">Začnemo selit, ker:</p>
+                  <h3 className="t-display mt-2 text-[clamp(2.4rem,5.4vw,4.75rem)]">{p.title}</h3>
                   <p className="mt-4 max-w-[46ch] text-lg">{p.text}</p>
                 </div>
               ) : (
@@ -137,8 +111,8 @@ export function Services() {
           <Link href={inquiryHref} className="btn btn-ink">
             Pošljite povpraševanje
           </Link>
-          <Link href="/cenik" className="link-u font-semibold">
-            Kako nastane cena selitve
+          <Link href="/#cenik" className="link-u font-semibold">
+            Poglejte cenik
           </Link>
         </div>
       </div>
@@ -266,7 +240,7 @@ export function Fleet() {
                   <dl className="mt-6 grid grid-cols-2 gap-4">
                     {v.specs.map((sp) => (
                       <div key={sp.label}>
-                        <dt className="text-sm text-steel">{sp.label}</dt>
+                        <dt className="text-sm text-[#4b5257]">{sp.label}</dt>
                         <dd className="t-num text-xl">{sp.value}</dd>
                       </div>
                     ))}

@@ -14,6 +14,7 @@ import {
   Lightning,
   Package,
   Phone,
+  Plus,
   Recycle,
   Truck,
   WarningCircle,
@@ -64,7 +65,6 @@ export function InquiryWizard({ initialService }: { initialService?: InquiryServ
   const [dir, setDir] = useState<"fwd" | "back">("fwd");
   const [errors, setErrors] = useState<FieldErrors>({});
   const [status, setStatus] = useState<Status>("idle");
-  const [target, setTarget] = useState<"from" | "to">("from");
   const startedAt = useRef<number | null>(null);
   const heading = useRef<HTMLHeadingElement>(null);
   const navigated = useRef(false); // focus moves only after the visitor changes step
@@ -154,27 +154,32 @@ export function InquiryWizard({ initialService }: { initialService?: InquiryServ
     setTimeout(() => go(1), 180);
   };
 
+  // Drag on the map: both ends at once.
+  const pickRoute = (fromId: string, toId: string) => {
+    const a = places.find((x) => x.id === fromId);
+    const b = places.find((x) => x.id === toId);
+    if (!a || !b) return;
+    setS((prev) => ({ ...prev, from: a.name, fromId: a.id, to: b.name, toId: b.id }));
+    setErrors((e) => ({ ...e, from: undefined, to: undefined }));
+  };
+
+  // Tap or keyboard on the map: first pick is the start, second the destination, a third starts over.
   const pickPlace = (id: string) => {
     const p = places.find((x) => x.id === id);
     if (!p) return;
-    if (target === "from") {
-      if (p.id === s.toId) return;
-      setS((prev) => ({ ...prev, from: p.name, fromId: p.id }));
-      setErrors((e) => ({ ...e, from: undefined }));
-      setTarget("to");
-    } else {
-      if (p.id === s.fromId) return;
-      setS((prev) => ({ ...prev, to: p.name, toId: p.id }));
-      setErrors((e) => ({ ...e, to: undefined }));
-    }
+    setS((prev) => {
+      const startOver = !prev.from.trim() || (prev.from.trim() && prev.to.trim());
+      if (startOver) return { ...prev, from: p.name, fromId: p.id, to: "", toId: undefined };
+      if (p.id === prev.fromId) return prev;
+      return { ...prev, to: p.name, toId: p.id };
+    });
+    setErrors((e) => ({ ...e, from: undefined, to: undefined }));
   };
 
   const typePlace = (which: "from" | "to", text: string) => {
     const hit = matchPlace(text);
     setS((prev) => (which === "from" ? { ...prev, from: text, fromId: hit?.id } : { ...prev, to: text, toId: hit?.id }));
     setErrors((e) => ({ ...e, [which]: undefined }));
-    // A recognised start town means the next map click is the destination.
-    if (which === "from" && hit && !s.to) setTarget("to");
   };
 
   // "ljubljana" becomes "Ljubljana" once the field is left.
@@ -186,10 +191,7 @@ export function InquiryWizard({ initialService }: { initialService?: InquiryServ
     });
 
   const swap = () => setS((p) => ({ ...p, from: p.to, fromId: p.toId, to: p.from, toId: p.fromId }));
-  const reset = () => {
-    setS((p) => ({ ...p, from: "", fromId: undefined, to: "", toId: undefined }));
-    setTarget("from");
-  };
+  const reset = () => setS((p) => ({ ...p, from: "", fromId: undefined, to: "", toId: undefined }));
 
   async function submit() {
     const e = stepErrors(4);
@@ -449,62 +451,19 @@ export function InquiryWizard({ initialService }: { initialService?: InquiryServ
             <h3 ref={heading} tabIndex={-1} className="t-headline outline-none">
               Od kod in kam?
             </h3>
-            <p className="mt-3 text-steel">
+            <p className="mt-3 max-w-[60ch] text-steel">
               {service === "odvoz"
-                ? "Izberite ali vpišite, od kod odpeljemo. Cilj ni obvezen."
-                : "Izberite začetno in končno lokacijo. Na zemljevidu ali z vpisom kraja ali naslova."}
+                ? "Povlecite od kraja, kjer odpeljemo, do kraja, kamor peljemo. Ali samo tapnite kraj, od koder odpeljemo."
+                : "Na zemljevidu povlecite od kraja, kjer začnemo, do kraja, kamor gremo. Ni vašega kraja? Vpišite ga spodaj."}
             </p>
 
-            <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-10">
-              <div>
-                <datalist id={`${uid}-places`}>
-                  {places.map((p) => (
-                    <option key={p.id} value={p.name} />
-                  ))}
-                  <option value={ABROAD_LABEL} />
-                </datalist>
-                <div className="grid gap-5">
-                  <PlaceField
-                    id={`${uid}-from`}
-                    label={service === "odvoz" ? "Od kod odpeljemo?" : "Od kod?"}
-                    letter="A"
-                    value={s.from}
-                    list={`${uid}-places`}
-                    active={target === "from"}
-                    onFocus={() => setTarget("from")}
-                    onBlur={() => {
-                      tidyPlace("from");
-                      if (s.from.trim() && !s.to.trim()) setTarget("to");
-                    }}
-                    onChange={(v) => typePlace("from", v)}
-                    error={errors.from}
-                    errorId={errId("from")}
-                  />
-                  <PlaceField
-                    id={`${uid}-to`}
-                    label={service === "odvoz" ? "Kam? (neobvezno)" : "Kam?"}
-                    letter="B"
-                    value={s.to}
-                    list={`${uid}-places`}
-                    active={target === "to"}
-                    onFocus={() => setTarget("to")}
-                    onBlur={() => tidyPlace("to")}
-                    onChange={(v) => typePlace("to", v)}
-                    placeholder={service === "odvoz" ? "Po dogovoru" : "Kraj, naslov ali Tujina"}
-                    error={errors.to}
-                    errorId={errId("to")}
-                  />
-                </div>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  <button type="button" onClick={swap} className="btn btn-sm btn-ghost" disabled={!s.from && !s.to}>
-                    <ArrowsDownUp size={16} weight="bold" aria-hidden /> Zamenjaj smer
-                  </button>
-                  <button type="button" onClick={reset} className="btn btn-sm btn-ghost" disabled={!s.from && !s.to}>
-                    <ArrowCounterClockwise size={16} weight="bold" aria-hidden /> Ponastavi
-                  </button>
-                </div>
+            <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,8fr)_minmax(0,4fr)] lg:gap-10">
+              <div className="-mx-3 rounded-[20px] bg-fog p-3 sm:mx-0 sm:p-5">
+                <RouteMap fromId={s.fromId} toId={s.toId} onRoute={pickRoute} onPick={pickPlace} />
+              </div>
 
-                <div className="mt-6 rounded-[20px] bg-ink p-5 text-white" aria-live="polite">
+              <div className="flex flex-col gap-6">
+                <div className="rounded-[20px] bg-ink p-5 text-white" aria-live="polite">
                   <p className="t-label text-white/60">Ocena razdalje</p>
                   {distance.kind === "km" ? (
                     <p className="mt-1">
@@ -516,30 +475,73 @@ export function InquiryWizard({ initialService }: { initialService?: InquiryServ
                       {distance.kind === "none"
                         ? service === "odvoz" && s.from
                           ? "Kam odpeljemo, se dogovorimo."
-                          : "Izberite obe lokaciji."
+                          : "Povlecite pot na zemljevidu."
                         : distanceLabel(distance)}
                     </p>
                   )}
+                  {s.from || s.to ? (
+                    <p className="mt-3 text-sm text-white/80">
+                      <span className="font-semibold text-white">A</span> {s.from || "?"} <span aria-hidden>→</span>{" "}
+                      <span className="font-semibold text-white">B</span> {s.to || (service === "odvoz" ? "po dogovoru" : "?")}
+                    </p>
+                  ) : null}
                   <p className="mt-2 text-xs text-white/55">Ocena po cestah iz OpenStreetMap, med središči krajev. Točno pot preverimo ob ponudbi.</p>
-                </div>
-              </div>
-
-              <div>
-                <div className="mb-3 flex flex-wrap items-center gap-2 text-sm" role="group" aria-label="Kaj izbirate na zemljevidu">
-                  <span className="text-steel">Na zemljevidu izbirate:</span>
-                  {(["from", "to"] as const).map((t) => (
-                    <button
-                      key={t}
-                      type="button"
-                      aria-pressed={target === t}
-                      onClick={() => setTarget(t)}
-                      className="chip px-4 text-sm"
-                    >
-                      {t === "from" ? "A · Od kod" : "B · Kam"}
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    <button type="button" onClick={swap} className="btn btn-sm btn-ghost text-white" disabled={!s.from && !s.to}>
+                      <ArrowsDownUp size={16} weight="bold" aria-hidden /> Zamenjaj
                     </button>
-                  ))}
+                    <button type="button" onClick={reset} className="btn btn-sm btn-ghost text-white" disabled={!s.from && !s.to}>
+                      <ArrowCounterClockwise size={16} weight="bold" aria-hidden /> Ponastavi
+                    </button>
+                  </div>
                 </div>
-                <RouteMap fromId={s.fromId} toId={s.toId} target={target} onPick={pickPlace} />
+
+                <details className="group rounded-[20px] border-[1.5px] border-mist p-5" open={!!(errors.from || errors.to) || undefined}>
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-semibold [&::-webkit-details-marker]:hidden">
+                    Ali vpišite kraj ali naslov
+                    <span className="grid h-8 w-8 place-items-center rounded-full bg-fog transition-transform group-open:rotate-45" aria-hidden>
+                      <Plus size={14} weight="bold" />
+                    </span>
+                  </summary>
+                  <datalist id={`${uid}-places`}>
+                    {places.map((p) => (
+                      <option key={p.id} value={p.name} />
+                    ))}
+                    <option value={ABROAD_LABEL} />
+                  </datalist>
+                  <div className="mt-4 grid gap-4">
+                    <PlaceField
+                      id={`${uid}-from`}
+                      label={service === "odvoz" ? "Od kod odpeljemo?" : "Od kod?"}
+                      letter="A"
+                      value={s.from}
+                      list={`${uid}-places`}
+                      active={!s.from.trim()}
+                      onBlur={() => tidyPlace("from")}
+                      onChange={(v) => typePlace("from", v)}
+                      error={errors.from}
+                      errorId={errId("from")}
+                    />
+                    <PlaceField
+                      id={`${uid}-to`}
+                      label={service === "odvoz" ? "Kam? (neobvezno)" : "Kam?"}
+                      letter="B"
+                      value={s.to}
+                      list={`${uid}-places`}
+                      active={!!s.from.trim() && !s.to.trim()}
+                      onBlur={() => tidyPlace("to")}
+                      onChange={(v) => typePlace("to", v)}
+                      placeholder={service === "odvoz" ? "Po dogovoru" : "Kraj, naslov ali Tujina"}
+                      error={errors.to}
+                      errorId={errId("to")}
+                    />
+                  </div>
+                </details>
+                {errors.from || errors.to ? (
+                  <p className="field-error -mt-3" role="alert">
+                    {errors.from ?? errors.to}
+                  </p>
+                ) : null}
               </div>
             </div>
           </div>
@@ -711,7 +713,7 @@ function PlaceField(props: {
   placeholder?: string;
   error?: string;
   errorId: string;
-  onFocus: () => void;
+  onFocus?: () => void;
   onBlur?: () => void;
   onChange: (v: string) => void;
 }) {

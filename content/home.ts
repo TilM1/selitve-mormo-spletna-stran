@@ -56,7 +56,7 @@ export const reasons = [
 export const faq = [
   {
     q: "Koliko stane selitveni servis v Ljubljani?",
-    a: "Cena je odvisna od količine stvari, nadstropja in dostopa, razdalje ter dodatnih storitev, kot je razstavljanje pohištva. Zato ne objavljamo enotne cene. Pošljite povpraševanje ali nas pokličite, pa vam pripravimo ponudbo za vašo selitev.",
+    a: "Selitve obračunamo po urah dela: kombi VW Crafter z dvema delavcema stane 60 € na uro, tovorno vozilo Iveco Daily z dvema delavcema 70 € na uro, prihod na lokacijo pa 30 oziroma 40 €. Cene so brez DDV. Manjša selitev s kombijem, ki traja dve uri, tako stane 150 € brez DDV oziroma 183 € z DDV. Celoten cenik je na strani Cenik.",
   },
   {
     q: "Kako hitro lahko organizirate selitev?",

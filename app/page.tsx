@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { preload } from "react-dom";
 import { Hero } from "@/components/home/Hero";
 import { Checklist } from "@/components/home/Checklist";
-import { ContactSection, Faq, Fleet, InquirySection, Process, Services, Tape, Team, WhyUs } from "@/components/home/Sections";
+import { PricingSection } from "@/components/home/Pricing";
+import { ContactSection, Faq, Fleet, InquirySection, Process, Services, Team, WhyUs } from "@/components/home/Sections";
 import { JsonLd } from "@/components/site/JsonLd";
 import { faq } from "@/content/home";
 import { faqSchema } from "@/lib/schema";
@@ -22,9 +23,9 @@ export default function Home() {
     <>
       <Hero />
       <InquirySection />
-      <Tape />
       <Process />
       <Services />
+      <PricingSection />
       <WhyUs />
       <Team />
       <Fleet />

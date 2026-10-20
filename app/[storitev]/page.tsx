@@ -131,7 +131,7 @@ export default async function ServicePage({ params }: Params) {
                   ))}
                 </ul>
                 <Link href="/cenik" className="link-u mt-6 inline-block text-white">
-                  Kako pripravimo ponudbo
+                  Poglejte cenik
                 </Link>
               </div>
               <div className="rounded-[20px] bg-kraft-light p-7">

@@ -24,6 +24,9 @@ export function HeroVideoController() {
       return;
     }
     v.muted = true;
+    // A touch slower than recorded; the loop stays seamless.
+    v.defaultPlaybackRate = 0.8;
+    v.playbackRate = 0.8;
     const play = () => v.play().catch(() => {}); // blocked (e.g. iOS Low Power Mode): the poster stays
     // Pause when the hero is off-screen or the tab is hidden, resume when back.
     let visible = true;

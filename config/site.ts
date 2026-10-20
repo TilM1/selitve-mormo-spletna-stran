@@ -56,6 +56,7 @@ export const nav = [
   { href: "/#kako-delamo", label: "Kako delamo" },
   { href: "/#ekipa", label: "Naša ekipa" },
   { href: "/#vozila", label: "Vozila" },
+  { href: "/#cenik", label: "Cenik" },
 ];
 
 export const inquiryHref = "/#povprasevanje";
@@ -73,11 +74,13 @@ export const vehicles: {
     type: "Kombi",
     suited: ["Selitev sobe ali manjšega stanovanja", "Posamezni kosi pohištva in bela tehnika", "Hitri prevozi po mestu"],
     photo: photos.crafter,
+    specs: [{ label: "Nosilnost", value: "do 1.300 kg" }],
   },
   {
     name: "Iveco Daily",
     type: "Tovorno vozilo s ponjavo",
     suited: ["Selitve stanovanj in hiš", "Pisarniška oprema", "Material in blago na paletah, nakladanje z viličarjem"],
     photo: photos.iveco,
+    specs: [{ label: "Nosilnost", value: "do 2.300 kg" }],
   },
 ];

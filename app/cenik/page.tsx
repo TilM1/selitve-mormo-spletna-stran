@@ -5,15 +5,13 @@ import { site } from "@/config/site";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { CallLink } from "@/components/site/ContactLinks";
 import { Faq, InquirySection } from "@/components/home/Sections";
+import { PriceExamples, PriceTables } from "@/components/home/Pricing";
 import { JsonLd } from "@/components/site/JsonLd";
 import { faqSchema } from "@/lib/schema";
 
-// No price list is published until prices are confirmed by the business. This page answers
-// "koliko stane selitev" honestly: what the price depends on and how to get a quote fast.
-
-const title = "Cenik selitev in prevozov | Kako nastane cena";
+const title = "Cenik selitev in prevozov Ljubljana | Cena na uro in km";
 const description =
-  "Koliko stane selitev v Ljubljani? Kaj vpliva na ceno selitve in prevoza, katere podatke potrebujemo in kako hitro dobite ponudbo. Brez obveznosti.";
+  "Cenik selitev: kombi in dva delavca 60 €/h, tovorno vozilo in dva delavca 70 €/h. Prevoz blaga od 1,10 €/km, odvoz kosovnih odpadkov 0,47 €/kg. Cene brez in z DDV.";
 
 export const metadata: Metadata = {
   title,
@@ -23,26 +21,28 @@ export const metadata: Metadata = {
 };
 
 const factors = [
-  { t: "Količina stvari", d: "Število večjih kosov pohištva in škatel določa, koliko ljudi in kakšno vozilo potrebujemo." },
-  { t: "Dostop", d: "Nadstropje, dvigalo, širina stopnišča in razdalja od vrat do vozila na obeh naslovih." },
-  { t: "Razdalja", d: "Pot med naslovoma. Pri prevozih zunaj Ljubljane in v tujino se upošteva tudi čas vožnje." },
-  { t: "Dodatno delo", d: "Razstavljanje in sestavljanje pohištva, zaščita posebnih kosov, odvoz stvari, ki jih ne selite." },
-  { t: "Termin", d: "Datum in ura selitve, na primer ob vikendu ali zunaj običajnega delovnega časa." },
-  { t: "Vrsta tovora", d: "Pri prevozu blaga štejeta teža in način nakladanja, pri odvozu vrsta odpadkov." },
+  { t: "Čas dela", d: "Selitve obračunamo po urah. Na čas vplivajo količina stvari, nadstropje, dvigalo in pot od vrat do vozila." },
+  { t: "Izbira vozila", d: "Kombi je cenejši na uro, tovorno vozilo pa pri večji selitvi prihrani kakšno vožnjo." },
+  { t: "Razdalja", d: "Pri prevozu blaga štejejo prevoženi kilometri. Pri poteh nad 420 km obračunamo tudi nočitev voznika." },
+  { t: "Dodatno delo", d: "Razstavljanje in sestavljanje pohištva ter pomoč pri pakiranju obračunamo po isti urni postavki." },
 ];
 
 const faq = [
   {
-    q: "Zakaj ne objavite fiksnih cen?",
-    a: "Ker sta dve selitvi redko enaki. Enosobno stanovanje v pritličju in enako stanovanje v četrtem nadstropju brez dvigala pomenita zelo različno količino dela. Ponudbo zato pripravimo za vaš primer.",
+    q: "Koliko stane selitev stanovanja v Ljubljani?",
+    a: "Selitev obračunamo po urah dela ekipe z vozilom: 60 € na uro s kombijem ali 70 € na uro s tovornim vozilom, plus prihod na lokacijo 30 ali 40 €. Cene so brez DDV. Koliko ur traja vaša selitev, ocenimo, ko nam opišete, kaj selite.",
+  },
+  {
+    q: "Ali so cene z DDV ali brez?",
+    a: "V ceniku je najprej cena brez DDV, pod njo pa znesek z 22 % DDV.",
+  },
+  {
+    q: "Kako se obračuna prevoz v tujino?",
+    a: "Za prevoz blaga v tujino velja enaka kilometrina kot v Sloveniji, cestnine in trajekte zaračunamo posebej. Za mednarodne selitve pripravimo ponudbo po meri.",
   },
   {
     q: "Ali je povpraševanje obvezujoče?",
-    a: "Ne. Povpraševanje in ponudba vas ne obvezujeta. Odločite se, ko ponudbo prejmete.",
-  },
-  {
-    q: "Kako hitro dobim ponudbo?",
-    a: "Odgovorimo v najkrajšem možnem času. Če ponudbo potrebujete takoj, nas pokličite.",
+    a: "Ne. Povpraševanje vas ne obvezuje. Končno ceno potrdimo ob dogovoru za termin.",
   },
 ];
 
@@ -54,7 +54,7 @@ export default function PricingPage() {
           <Breadcrumbs items={[{ name: "Cenik", path: "/cenik" }]} />
           <h1 className="t-display mt-8 max-w-[16ch] text-[clamp(2.4rem,6vw,5.25rem)]">Koliko stane selitev?</h1>
           <p className="t-lead mt-6 max-w-[60ch] text-white/85">
-            Cena selitve je odvisna od količine stvari, dostopa na obeh naslovih, razdalje in dodatnega dela. Zato ne objavljamo enotnega cenika, ampak za vsako selitev ali prevoz pripravimo ponudbo. Brez obveznosti.
+            Selitev s kombijem in dvema delavcema stane 60 € na uro, s tovornim vozilom 70 € na uro, brez DDV. Prevoz blaga obračunamo po kilometrih, odvoz kosovnih odpadkov po teži. Spodaj je celoten cenik.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <CallLink place="cenik" className="btn btn-primary btn-lg">
@@ -67,12 +67,18 @@ export default function PricingPage() {
         </div>
       </header>
 
-      <section className="section" aria-labelledby="dejavniki">
+      <section className="section" aria-labelledby="cenik-h">
         <div className="wrap">
-          <h2 id="dejavniki" className="t-headline">
-            Kaj vpliva na ceno
+          <h2 id="cenik-h" className="sr-only">
+            Cenik
           </h2>
-          <div className="mt-12 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+          <PriceTables />
+          <div className="mt-10">
+            <PriceExamples />
+          </div>
+
+          <h2 className="t-headline mt-20 text-[clamp(1.75rem,3.2vw,2.5rem)]">Kaj vpliva na končni znesek</h2>
+          <div className="mt-8 grid gap-x-10 gap-y-10 sm:grid-cols-2">
             {factors.map((f) => (
               <div key={f.t} className="border-t-2 border-ink pt-5">
                 <h3 className="t-title">{f.t}</h3>
@@ -80,32 +86,14 @@ export default function PricingPage() {
               </div>
             ))}
           </div>
-
-          <div className="mt-20 grid gap-8 rounded-[20px] bg-ink p-7 text-white md:grid-cols-2 md:p-12">
-            <div>
-              <h2 className="t-headline text-[clamp(1.75rem,3.2vw,2.5rem)]">Za hitro ponudbo nam pošljite</h2>
-              <p className="mt-4 text-white/70">Več kot vemo, natančnejša je ponudba. Fotografije lahko pošljete po SMS na {site.phone.display}.</p>
-            </div>
-            <ul className="space-y-3">
-              {[
-                "Kaj selite ali prevažate, z večjimi kosi",
-                "Od kod in kam",
-                "Nadstropje in dvigalo na obeh naslovih",
-                "Želeni datum",
-                "Ali je treba kaj razstaviti ali odpeljati",
-              ].map((x) => (
-                <li key={x} className="flex gap-3">
-                  <span className="mt-2.5 h-1.5 w-3 shrink-0 rounded-full bg-lime" aria-hidden />
-                  {x}
-                </li>
-              ))}
-            </ul>
-          </div>
+          <p className="mt-10 text-steel">
+            Fotografije večjih kosov lahko pošljete po SMS na {site.phone.display}, pa vam čas dela ocenimo natančneje.
+          </p>
         </div>
       </section>
 
       <Faq items={faq} title="Vprašanja o ceni" />
-      <InquirySection title="Pošljite povpraševanje za ponudbo" />
+      <InquirySection title="Pošljite povpraševanje" />
       <JsonLd data={faqSchema(faq)} />
     </>
   );

@@ -26,7 +26,7 @@ export function Nav() {
           <Link href="/kontakt" className="btn btn-sm hidden px-3 text-white/90 hover:text-white xl:inline-flex">
             Kontakt
           </Link>
-          <SmsLink place="nav" className="btn btn-sm btn-ghost hidden md:inline-flex">
+          <SmsLink place="nav" className="btn btn-sm btn-ghost hidden md:inline-flex lg:hidden xl:inline-flex">
             <ChatText size={18} weight="bold" aria-hidden />
             <span>Pošljite SMS</span>
           </SmsLink>
