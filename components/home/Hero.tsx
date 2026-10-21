@@ -21,14 +21,14 @@ export function Hero() {
       <HeroVideoController />
       <div className="hero__overlay" aria-hidden />
 
-      <div className="wrap hero__rise self-center py-8 md:py-10">
-        <h1 className="hero__title max-w-[19ch]">
+      <div className="wrap hero__rise self-end pb-6 pt-8 md:pb-8">
+        <h1 className="hero__title max-w-[15ch]">
           Selitveni servis Ljubljana. <span className="text-white/80">Selitve brez zapletov.</span>
         </h1>
-        <p className="mt-5 max-w-[42ch] text-[1.05rem] leading-relaxed text-white/85">
+        <p className="mt-4 max-w-[40ch] text-[0.98rem] leading-relaxed text-white/85">
           Selitve stanovanj, pisarn in prevoz pohištva po Ljubljani ter okolici. Pomagamo pri prenašanju, zaščiti in prevozu vaših stvari.
         </p>
-        <div className="mt-7 flex flex-wrap gap-3">
+        <div className="mt-6 flex flex-wrap gap-3">
           <CallLink place="hero" className="btn btn-primary">
             <Phone size={20} weight="fill" aria-hidden />
             Pokličite nas
